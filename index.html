@@ -642,7 +642,7 @@
               </div>
               <div id="echart-p1-c2" class="w-full h-[220px]"></div>
               <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p1-c2-footnote">
-                <a href="http://www.nso.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานสถิติแห่งชาติ (NSO)</a>
+                แหล่งข้อมูลอ้างอิง: สำนักงานเศรษฐกิจการเกษตร (สศก.)/สำนักงานสถิติแห่งชาติ
               </div>
             </div>
 
@@ -698,7 +698,7 @@
               </div>
               <div id="echart-p2-c2" class="w-full h-[220px]"></div>
               <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p2-c2-footnote">
-                <a href="http://www.nso.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานสถิติแห่งชาติ (NSO)</a>
+                แหล่งข้อมูลอ้างอิง: สำนักงานเศรษฐกิจการเกษตร (สศก.)/สำนักงานสถิติแห่งชาติ
               </div>
             </div>
 
@@ -754,7 +754,7 @@
               </div>
               <div id="echart-p3-c2" class="w-full h-[220px]"></div>
               <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p3-c2-footnote">
-                <a href="https://www.oae.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานเศรษฐกิจการเกษตร (OAE)</a>
+                แหล่งข้อมูลอ้างอิง: สำนักงานเศรษฐกิจการเกษตร (สศก.)/สำนักงานสถิติแห่งชาติ
               </div>
             </div>
 
@@ -16760,25 +16760,22 @@
           const discEl = document.getElementById(`top3-p${pNum}-c2-disclaimer`);
           if (discEl) discEl.classList.add('hidden');
 
-          // Update Clickable Footnote with distinct source URLs
+          // Update Reference Footnote: plain text without links as requested
           const footEl = document.getElementById(`top3-p${pNum}-c2-footnote`);
           if (footEl) {
-            const linkMap = new Map();
+            const agencyList = [];
             top3Valids.forEach(v => {
-              if (v && v.source_url && v.official_agency) {
+              if (v && v.official_agency) {
                 const agencyName = v.official_agency.split('/')[0].trim();
-                linkMap.set(v.source_url, agencyName);
+                if (!agencyList.includes(agencyName)) {
+                  agencyList.push(agencyName);
+                }
               }
             });
-            let linkHtml = '<span class="text-slate-400">🔗 แหล่งข้อมูลอ้างอิง: </span>';
-            let links = [];
-            linkMap.forEach((agency, url) => {
-              links.push(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="underline text-amber-400 hover:text-amber-300 transition-colors">${agency}</a>`);
-            });
-            if (links.length === 0) {
-              links.push(`<a href="https://www.nso.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">สำนักงานสถิติแห่งชาติ (NSO)</a>`);
+            if (agencyList.length === 0) {
+              agencyList.push('สำนักงานเศรษฐกิจการเกษตร (สศก.)', 'สำนักงานสถิติแห่งชาติ');
             }
-            footEl.innerHTML = linkHtml + links.join(' / ');
+            footEl.textContent = `แหล่งข้อมูลอ้างอิง: ${agencyList.join('/')}`;
           }
 
           const optC2 = {
@@ -16890,6 +16887,7 @@
           const shortLabels = top3Needs.map((n, i) => `#${3 - i} ${n.Iss_Need_Grouped.slice(0, 10)}`);
           const fullDetails = top3Needs.map(n => n.Iss_Need);
           const vals = top3Needs.map(n => parseFloat(n.Per_vill) || 0);
+          const palette = ['#FF0055', '#8A2BE2', '#FF6B00'];
 
           const optC3 = {
             backgroundColor: 'transparent',
@@ -16915,7 +16913,7 @@
             },
             series: [{
               type: 'bar',
-              data: vals.map(v => ({ value: v, itemStyle: { color: '#8A2BE2', borderRadius: [0, 4, 4, 0] } })),
+              data: vals.map((v, i) => ({ value: v, itemStyle: { color: palette[i % 3], borderRadius: [0, 4, 4, 0] } })),
               label: { show: true, position: 'right', formatter: '{c}%', color: '#FFF', fontSize: 10, fontWeight: 'bold' }
             }]
           };
