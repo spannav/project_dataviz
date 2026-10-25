@@ -4,14 +4,6 @@
   <h3>แดชบอร์ดสำรวจความเดือดร้อนของประชาชน & บทพิสูจน์ข้อเท็จจริงภายนอก (77 จังหวัด)</h3>
 
   <p>
-    <a href="https://project-dataviz.vercel.app" target="_blank">
-      <img src="https://img.shields.io/badge/LIVE%20DEMO-project--dataviz.vercel.app-FF6B00?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo on Vercel" />
-    </a>
-    <img src="https://img.shields.io/badge/Theme-Halloween%20Haunted-8A2BE2?style=for-the-badge&logo=ghost" alt="Theme Halloween" />
-    <img src="https://img.shields.io/badge/Data%20Scope-77%20Provinces%20(2566--2567)-00FF66?style=for-the-badge" alt="Coverage 77 Provinces" />
-  </p>
-
-  <p>
     🔗 <b>เข้าชมเว็บไซต์จริง (Production Link):</b><br/>
     <a href="https://project-dataviz.vercel.app" target="_blank" style="font-size: 16px; font-weight: bold; color: #FF6B00;">
       👉 https://project-dataviz.vercel.app 👈
