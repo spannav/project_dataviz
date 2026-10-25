@@ -15452,6 +15452,7 @@
     // Populate Province Selectors
     function populateProvinceSelect() {
       const sel = document.getElementById('case-study-province-select');
+      if (!sel) return;
       sel.innerHTML = '';
       const provs = Object.keys(DASHBOARD_DATA.provinces).sort((a, b) => a.localeCompare(b, 'th'));
       provs.forEach(p => {
@@ -15814,7 +15815,7 @@
             roam: true,
             zoom: 1.15,
             center: [101.0, 13.5],
-            nameMap: GEOJSON_EN_TO_TH,
+            // nameMap: GEOJSON_EN_TO_TH,
             itemStyle: {
               borderColor: '#2D1B45',
               borderWidth: 0.8,
@@ -15888,12 +15889,10 @@
       }
       const sel = document.getElementById('case-study-province-select');
       if (sel) sel.value = pName;
-      renderVisualComparisonSection2();
     }
 
     function inspectSelectedProvinceInTab2() {
       switchTab(2);
-      setCaseStudyProvince(selectedProvinceName);
     }
 
     // ==========================================
