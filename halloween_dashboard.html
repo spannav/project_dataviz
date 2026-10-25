@@ -477,23 +477,25 @@
     <!-- ========================================== -->
     <section id="tab-content-2" class="tab-content space-y-6 hidden">
 
-      <!-- SECTION 1 (TOP): INTERCONNECTED STACKED BAR & SUB-ISSUE RANKING (SIDE-BY-SIDE) -->
+      <!-- ================================================================ -->
+      <!-- SECTION 1 (TOP): TOP 10 IMPACTED PROVINCES & TOP 10 SUB-ISSUES   -->
+      <!-- ================================================================ -->
       <div class="glass-card p-5 rounded-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-3 pb-3 border-b border-purple-900/30">
           <div>
             <h2 class="text-base font-bold text-pumpkin glow-orange-text flex items-center gap-2">
               <span>🏆</span>
-              <span>SECTION 1: Interconnected Provincial Top 3 Needs & Sub-issue Breakdown</span>
+              <span>SECTION 1: Top 10 Impacted Provinces & Top 10 Sub-Issues (ภาพรวมระดับประเทศ/ภูมิภาค)</span>
             </h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              คลิกที่แท่งจังหวัดฝั่งซ้าย เพื่อดูการจำแนกรายละเอียดปัญหาเฉพาะ (<span class="text-toxic font-semibold">Sub-issue Iss_Need</span>) ของจังหวัดนั้นแบบ Real-time ฝั่งขวา
+              กราฟคู่ขนาน Dual-Panel: ฝั่งซ้ายเน้น 🥇🥈🥉 <b class="text-pumpkin">3 อันดับแรกที่เดือดร้อนสะสมสูงสุด</b> (ส่งต่อสู่ Section 2) & ฝั่งขวาแสดง <b class="text-toxic">10 ปัญหาย่อยวิกฤตที่สุด</b>
             </p>
           </div>
 
-          <!-- Region Filter for Top 10 -->
+          <!-- Region Filter for Section 1 -->
           <div class="flex items-center gap-2">
             <span class="text-xs text-slate-400">กรองภูมิภาค:</span>
-            <select id="top10-region-filter" onchange="renderTop10ProvincesChart()" class="bg-gothic-800 text-xs text-slate-200 border border-purple-500/40 rounded-lg px-3 py-1.5 focus:outline-none focus:border-pumpkin shadow-sm">
+            <select id="top10-region-filter" onchange="renderTab2Section1And2()" class="bg-gothic-800 text-xs text-slate-200 border border-purple-500/40 rounded-lg px-3 py-1.5 focus:outline-none focus:border-pumpkin shadow-sm">
               <option value="ALL">🌐 ทุกภูมิภาค (Top 10 ประเทศ)</option>
               <option value="ภาคเหนือ">ภาคเหนือ</option>
               <option value="ภาคตะวันออกเฉียงเหนือ">ภาคตะวันออกเฉียงเหนือ</option>
@@ -505,214 +507,233 @@
           </div>
         </div>
 
-        <!-- 2 COLUMNS: PRIMARY STACKED BAR (LEFT) & SECONDARY SUB-ISSUE RANKING (RIGHT) -->
+        <!-- 2 COLUMNS DUAL-PANEL -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-2">
           
-          <!-- LEFT (7 COLS): PRIMARY HORIZONTAL STACKED BAR -->
+          <!-- LEFT (7 COLS): PRIMARY TOP 10 PROVINCES (STACKED BAR WITH TOP 3 EMPHASIS) -->
           <div class="lg:col-span-7 flex flex-col justify-between">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
                 <span>📊</span>
-                <span>Top 10 Most Impacted Provinces (สัดส่วนสะสม 3 อันดับแรก)</span>
+                <span>Provincial Top 10 Needs Stacked Bar Chart</span>
               </span>
-              <span class="text-[10px] text-purple-300 font-mono">คลิกแท่งเพื่อส่ง Signal</span>
+              <span class="text-[10px] text-pumpkin font-mono font-bold">✨ ไฮไลต์เด่น 3 อันดับแรก</span>
             </div>
-            <div id="echart-top10-provinces" class="w-full h-[360px] rounded-xl bg-gothic-900/50"></div>
+            <div id="echart-top10-provinces" class="w-full h-[370px] rounded-xl bg-gothic-900/50"></div>
           </div>
 
-          <!-- RIGHT (5 COLS): SECONDARY LINKED SUB-ISSUE BREAKDOWN -->
-          <div class="lg:col-span-5 bg-black/40 p-4 rounded-xl border border-purple-500/30 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-800">
-                <span class="text-xs font-bold text-toxic flex items-center gap-1.5">
-                  <span>🎯</span>
-                  <span>Sub-issue Breakdown: <b id="subissue-target-prov" class="text-pumpkin ml-1">เชียงใหม่</b></span>
-                </span>
-                <span id="subissue-target-group" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-mono">ภาคเหนือ</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mb-2">
-                เจาะลึกประเด็นปัญหาเฉพาะย่อย (<span class="text-white">Iss_Need</span>) ภายใต้ 3 ด้านหลักที่วิกฤตที่สุด:
-              </p>
+          <!-- RIGHT (5 COLS): SECONDARY NATIONAL TOP 10 SUB-ISSUES (ISS_NEED) -->
+          <div class="lg:col-span-5 bg-black/40 p-3.5 rounded-xl border border-purple-500/30 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1 pb-1.5 border-b border-slate-800">
+              <span class="text-xs font-bold text-toxic flex items-center gap-1.5">
+                <span>🔥</span>
+                <span>Top 10 Sub-Issue (Iss_Need) Ranking Chart</span>
+              </span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-mono">10 ประเด็นย่อยวิกฤต</span>
             </div>
+            <p class="text-[10px] text-slate-400 mb-1">
+              ปัญหาย่อยเฉพาะเจาะจง (<span class="text-white">Iss_Need</span>) ที่มีสัดส่วน % เดือดร้อนสูงสุดในพื้นที่:
+            </p>
             
-            <!-- Linked Sub-issue Chart Container -->
-            <div id="echart-subissue-ranking" class="w-full h-[280px]"></div>
+            <div id="echart-top10-subissues" class="w-full h-[320px]"></div>
 
-            <div class="text-[10px] text-slate-400 pt-2 border-t border-slate-800 flex items-center justify-between">
-              <span>แหล่งที่มา: ผลสำรวจ สสน.</span>
-              <span class="text-toxic">⚡ อัปเดตอัตโนมัติตามคลิก</span>
+            <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800 flex items-center justify-between">
+              <span>ข้อมูลผลสำรวจ สสน.</span>
+              <span class="text-toxic">คำนวณตามตัวกรองภูมิภาค</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- SECTION 2 (BOTTOM): VISUAL COMPARATIVE ANALYSIS & EXTERNAL BENCHMARK -->
-      <div class="glass-card p-5 rounded-2xl border-2 border-purple-500/40 shadow-neon-purple">
+      <!-- ================================================================ -->
+      <!-- SECTION 2 (BOTTOM): TOP 3 PROVINCES TRI-CHART COMPARATIVE GRID    -->
+      <!-- 3 PROVINCES x 3 CHARTS = 9 CHARTS TOTAL                           -->
+      <!-- ================================================================ -->
+      <div class="space-y-6">
         
-        <!-- Header & Searchable Dropdown -->
-        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-purple-900/40">
+        <div class="flex flex-wrap items-center justify-between gap-3 px-1">
           <div>
-            <h2 class="text-lg font-bold text-toxic glow-green-text flex items-center gap-2">
+            <h2 class="text-base font-bold text-toxic glow-green-text flex items-center gap-2">
               <span>🔮</span>
-              <span>SECTION 2: Visual Comparative Analysis (เปรียบเทียบข้อมูลภายนอกเชิงภาพ 3 คู่ขนาน)</span>
+              <span>SECTION 2: Top 3 Provinces Tri-Chart Comparative Grid (เจาะลึก 3 จังหวัดอันดับแรก - รวม 9 กราฟ)</span>
             </h2>
-            <p class="text-xs text-slate-300 mt-0.5">
-              เปรียบเทียบตัวเลขผลสำรวจฝั่งซ้าย ชนกับ <span class="text-toxic font-semibold">ดัชนีชี้วัดจริงภายนอกในรูปแบบกราฟเชิงภาพ (Comparative Charts)</span>
+            <p class="text-xs text-slate-400 mt-0.5">
+              นำ 3 จังหวัดที่มีความเดือดร้อนสะสมสูงสุดจาก Section 1 มาวิเคราะห์เจาะลึกพร้อมกันทั้ง 3 ด้าน: <b class="text-pumpkin">กราฟที่ 1: หมวดหลัก</b> | <b class="text-toxic">กราฟที่ 2: เทียบสถิติจริงภายนอก</b> | <b class="text-purple-300">กราฟที่ 3: ปัญหาย่อยเฉพาะ</b>
             </p>
           </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-witch/30 border border-witch text-purple-200 font-mono font-semibold">
+            Synchronized Top 3 Impacted
+          </span>
+        </div>
 
-          <!-- Searchable Province Dropdown -->
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-slate-400">ค้นหา/เลือกจังหวัด:</span>
-            <select id="case-study-province-select" onchange="onCaseStudyProvinceChange()" class="bg-gothic-800 text-sm font-semibold text-pumpkin border-2 border-pumpkin rounded-xl px-3.5 py-2 focus:outline-none shadow-neon-orange">
-              <!-- Dynamically populated -->
-            </select>
+        <!-- CONTAINER 1: 🏆 RANK 1 PROVINCE -->
+        <div id="top3-card-1" class="glass-card p-5 rounded-2xl border-2 border-pumpkin/60 shadow-neon-orange transition-all">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-4 border-b border-purple-900/40">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🥇</span>
+              <div>
+                <h3 class="text-lg font-bold text-pumpkin glow-orange-text flex items-center gap-2">
+                  <span>อันดับ 1:</span>
+                  <span id="top3-p1-name" class="text-white">ปัตตานี</span>
+                  <span id="top3-p1-group" class="text-xs px-2.5 py-0.5 rounded-full bg-pumpkin/20 border border-pumpkin/50 text-pumpkin font-mono font-normal">ภาคใต้</span>
+                </h3>
+                <p class="text-xs text-slate-400">ระดับความเดือดร้อนสะสมรวม 3 ด้านแรก: <b id="top3-p1-total" class="text-toxic font-mono font-bold text-sm">152.9%</b></p>
+              </div>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-xl bg-black/60 border border-pumpkin/40 text-pumpkin font-mono">Top Impacted Rank #1</span>
+          </div>
+
+          <!-- 3 CHARTS IN ROW -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Chart 1: หมวดหมู่ปัญหาหลัก 3 ด้าน -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-pumpkin">📈 กราฟที่ 1: หมวดปัญหาหลัก 3 อันดับ</span>
+                <span class="text-[10px] text-slate-400">% หมู่บ้าน</span>
+              </div>
+              <div id="echart-p1-c1" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">สัดส่วนความต้องการแก้ปัญหา 3 ด้านแรก</div>
+            </div>
+
+            <!-- Chart 2: เทียบสถิติจริงภายนอก -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก</span>
+                <span id="top3-p1-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+              </div>
+              <!-- Disclaimer Badge if no external data -->
+              <div id="top3-p1-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
+                ⚠️ ไม่มีข้อมูลสถิติอ้างอิงภายนอกในหมวดนี้ (แสดงเฉพาะผลสำรวจในพื้นที่)
+              </div>
+              <div id="echart-p1-c2" class="w-full h-[180px]"></div>
+              <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p1-c2-footnote">
+                <a href="http://www.nso.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานสถิติแห่งชาติ (NSO)</a>
+              </div>
+            </div>
+
+            <!-- Chart 3: ปัญหาย่อยเฉพาะเจาะจง 3 อันดับ -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-purple-300">🎯 กราฟที่ 3: ปัญหาย่อยเฉพาะ (Iss_Need)</span>
+                <span class="text-[10px] text-slate-400">% เดือดร้อน</span>
+              </div>
+              <div id="echart-p1-c3" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">รายละเอียดประเด็นย่อย 3 ลำดับแรก</div>
+            </div>
           </div>
         </div>
 
-        <!-- Quick Pick Province Pills -->
-        <div class="flex flex-wrap items-center gap-2 pt-3 pb-3 text-xs border-b border-purple-900/20">
-          <span class="text-slate-400">จังหวัดแนะนำ:</span>
-          <button onclick="setCaseStudyProvince('อุดรธานี')" class="px-2.5 py-1 rounded-lg bg-gothic-800 hover:bg-pumpkin/30 border border-slate-700 hover:border-pumpkin text-slate-200 transition">อุดรธานี (อีสาน)</button>
-          <button onclick="setCaseStudyProvince('เชียงใหม่')" class="px-2.5 py-1 rounded-lg bg-gothic-800 hover:bg-pumpkin/30 border border-slate-700 hover:border-pumpkin text-slate-200 transition">เชียงใหม่ (เหนือ)</button>
-          <button onclick="setCaseStudyProvince('กรุงเทพมหานคร')" class="px-2.5 py-1 rounded-lg bg-gothic-800 hover:bg-pumpkin/30 border border-slate-700 hover:border-pumpkin text-slate-200 transition">กรุงเทพฯ (กลาง)</button>
-          <button onclick="setCaseStudyProvince('สุราษฎร์ธานี')" class="px-2.5 py-1 rounded-lg bg-gothic-800 hover:bg-pumpkin/30 border border-slate-700 hover:border-pumpkin text-slate-200 transition">สุราษฎร์ธานี (ใต้)</button>
-          <button onclick="setCaseStudyProvince('นครราชสีมา')" class="px-2.5 py-1 rounded-lg bg-gothic-800 hover:bg-pumpkin/30 border border-slate-700 hover:border-pumpkin text-slate-200 transition">นครราชสีมา (อีสาน)</button>
+        <!-- CONTAINER 2: 🥈 RANK 2 PROVINCE -->
+        <div id="top3-card-2" class="glass-card p-5 rounded-2xl border-2 border-purple-500/60 shadow-neon-purple transition-all">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-4 border-b border-purple-900/40">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🥈</span>
+              <div>
+                <h3 class="text-lg font-bold text-purple-300 glow-purple-text flex items-center gap-2">
+                  <span>อันดับ 2:</span>
+                  <span id="top3-p2-name" class="text-white">ระยอง</span>
+                  <span id="top3-p2-group" class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/50 text-purple-300 font-mono font-normal">ภาคตะวันออก</span>
+                </h3>
+                <p class="text-xs text-slate-400">ระดับความเดือดร้อนสะสมรวม 3 ด้านแรก: <b id="top3-p2-total" class="text-toxic font-mono font-bold text-sm">137.6%</b></p>
+              </div>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-xl bg-black/60 border border-purple-500/40 text-purple-300 font-mono">Top Impacted Rank #2</span>
+          </div>
+
+          <!-- 3 CHARTS IN ROW -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Chart 1: หมวดหมู่ปัญหาหลัก 3 ด้าน -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-purple-300">📈 กราฟที่ 1: หมวดปัญหาหลัก 3 อันดับ</span>
+                <span class="text-[10px] text-slate-400">% หมู่บ้าน</span>
+              </div>
+              <div id="echart-p2-c1" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">สัดส่วนความต้องการแก้ปัญหา 3 ด้านแรก</div>
+            </div>
+
+            <!-- Chart 2: เทียบสถิติจริงภายนอก -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก</span>
+                <span id="top3-p2-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+              </div>
+              <div id="top3-p2-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
+                ⚠️ ไม่มีข้อมูลสถิติอ้างอิงภายนอกในหมวดนี้ (แสดงเฉพาะผลสำรวจในพื้นที่)
+              </div>
+              <div id="echart-p2-c2" class="w-full h-[180px]"></div>
+              <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p2-c2-footnote">
+                <a href="http://www.nso.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานสถิติแห่งชาติ (NSO)</a>
+              </div>
+            </div>
+
+            <!-- Chart 3: ปัญหาย่อยเฉพาะเจาะจง 3 อันดับ -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-pumpkin">🎯 กราฟที่ 3: ปัญหาย่อยเฉพาะ (Iss_Need)</span>
+                <span class="text-[10px] text-slate-400">% เดือดร้อน</span>
+              </div>
+              <div id="echart-p2-c3" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">รายละเอียดประเด็นย่อย 3 ลำดับแรก</div>
+            </div>
+          </div>
         </div>
 
-        <!-- 3 PARALLEL COMPARATIVE ROWS (1-TO-1 VISUAL COMPARISON) -->
-        <div class="space-y-4 mt-4">
-          
-          <!-- PAIR 1 (RANK 1) -->
-          <div id="pair-row-1" onmouseenter="activatePair(1)" onmouseleave="deactivatePair(1)" class="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 rounded-xl bg-gothic-900/80 border border-pumpkin/30 transition-all duration-200">
-            <!-- Left Problem Card 1 -->
-            <div class="lg:col-span-5 flex flex-col justify-between">
+        <!-- CONTAINER 3: 🥉 RANK 3 PROVINCE -->
+        <div id="top3-card-3" class="glass-card p-5 rounded-2xl border-2 border-toxic/60 shadow-neon-green transition-all">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-4 border-b border-purple-900/40">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🥉</span>
               <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs font-bold text-pumpkin flex items-center gap-1.5">
-                    <span class="text-base">🥇</span> ปัญหาอันดับ 1: <span id="pair1-left-title" class="text-white">ราคาสินค้าเกษตรและปัจจัยการผลิต</span>
-                  </span>
-                  <span id="pair1-left-pct" class="text-base font-bold text-pumpkin font-mono">42.5%</span>
-                </div>
-                <p id="pair1-left-desc" class="text-xs text-slate-300 mb-2 pl-6">-</p>
-              </div>
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>สัดส่วนหมู่บ้านที่พบปัญหา</span>
-                  <span id="pair1-left-bar-text" class="text-pumpkin font-mono font-semibold">42.5%</span>
-                </div>
-                <div class="w-full bg-black/60 rounded-full h-2 overflow-hidden">
-                  <div id="pair1-left-bar" class="bg-gradient-to-r from-yellow-500 to-pumpkin h-2 rounded-full transition-all duration-500" style="width: 42.5%"></div>
-                </div>
+                <h3 class="text-lg font-bold text-toxic glow-green-text flex items-center gap-2">
+                  <span>อันดับ 3:</span>
+                  <span id="top3-p3-name" class="text-white">อุดรธานี</span>
+                  <span id="top3-p3-group" class="text-xs px-2.5 py-0.5 rounded-full bg-toxic/20 border border-toxic/50 text-toxic font-mono font-normal">ภาคตะวันออกเฉียงเหนือ</span>
+                </h3>
+                <p class="text-xs text-slate-400">ระดับความเดือดร้อนสะสมรวม 3 ด้านแรก: <b id="top3-p3-total" class="text-toxic font-mono font-bold text-sm">133.3%</b></p>
               </div>
             </div>
-
-            <!-- Right Visual Comparative Chart 1 -->
-            <div class="lg:col-span-7 bg-black/40 p-3 rounded-lg border border-purple-500/20 flex flex-col justify-between">
-              <!-- Disclaimer Banner (shown when no external data) -->
-              <div id="pair1-right-disclaimer" class="hidden mb-2 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[11px] text-yellow-300 flex items-center gap-1.5">
-                <span>⚠️</span>
-                <span>หมายเหตุ: ปัญหาหมวดหมู่นี้/ปีสำรวจนี้ ไม่มีข้อมูลสถิติต่างหากอ้างอิงจากหน่วยงานภายนอก (แสดงเฉพาะผลสำรวจในพื้นที่)</span>
-              </div>
-              <div class="flex items-center justify-between mb-1">
-                <span id="pair1-right-title" class="text-xs font-bold text-toxic truncate">สศก. & กรมชลประทาน: ดัชนีราคาสินค้าเกษตร</span>
-                <span id="pair1-right-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">🟢 สอดคล้องสูง (89%)</span>
-              </div>
-              <div id="echart-pair-1" class="w-full h-[100px]"></div>
-              <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-800">
-                <span id="pair1-right-agency">แหล่งข้อมูล: สนง.เศรษฐกิจการเกษตร (สศก.)</span>
-                <span id="pair1-right-metric" class="text-toxic font-mono font-semibold">ดัชนี -12.4%</span>
-              </div>
-            </div>
+            <span class="text-xs px-3 py-1 rounded-xl bg-black/60 border border-toxic/40 text-toxic font-mono">Top Impacted Rank #3</span>
           </div>
 
-          <!-- PAIR 2 (RANK 2) -->
-          <div id="pair-row-2" onmouseenter="activatePair(2)" onmouseleave="deactivatePair(2)" class="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 rounded-xl bg-gothic-900/80 border border-witch/30 transition-all duration-200">
-            <!-- Left Problem Card 2 -->
-            <div class="lg:col-span-5 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs font-bold text-purple-300 flex items-center gap-1.5">
-                    <span class="text-base">🥈</span> ปัญหาอันดับ 2: <span id="pair2-left-title" class="text-white">ค่าครองชีพและราคาสินค้า</span>
-                  </span>
-                  <span id="pair2-left-pct" class="text-base font-bold text-purple-300 font-mono">28.0%</span>
-                </div>
-                <p id="pair2-left-desc" class="text-xs text-slate-300 mb-2 pl-6">-</p>
+          <!-- 3 CHARTS IN ROW -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Chart 1: หมวดหมู่ปัญหาหลัก 3 ด้าน -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-toxic">📈 กราฟที่ 1: หมวดปัญหาหลัก 3 อันดับ</span>
+                <span class="text-[10px] text-slate-400">% หมู่บ้าน</span>
               </div>
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>สัดส่วนหมู่บ้านที่พบปัญหา</span>
-                  <span id="pair2-left-bar-text" class="text-purple-300 font-mono font-semibold">28.0%</span>
-                </div>
-                <div class="w-full bg-black/60 rounded-full h-2 overflow-hidden">
-                  <div id="pair2-left-bar" class="bg-gradient-to-r from-purple-700 to-witch-glow h-2 rounded-full transition-all duration-500" style="width: 28%"></div>
-                </div>
+              <div id="echart-p3-c1" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">สัดส่วนความต้องการแก้ปัญหา 3 ด้านแรก</div>
+            </div>
+
+            <!-- Chart 2: เทียบสถิติจริงภายนอก -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก</span>
+                <span id="top3-p3-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+              </div>
+              <div id="top3-p3-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
+                ⚠️ ไม่มีข้อมูลสถิติอ้างอิงภายนอกในหมวดนี้ (แสดงเฉพาะผลสำรวจในพื้นที่)
+              </div>
+              <div id="echart-p3-c2" class="w-full h-[180px]"></div>
+              <div class="text-[10px] text-slate-400 pt-1 border-t border-slate-800" id="top3-p3-c2-footnote">
+                <a href="https://www.oae.go.th" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: สำนักงานเศรษฐกิจการเกษตร (OAE)</a>
               </div>
             </div>
 
-            <!-- Right Visual Comparative Chart 2 -->
-            <div class="lg:col-span-7 bg-black/40 p-3 rounded-lg border border-purple-500/20 flex flex-col justify-between">
-              <!-- Disclaimer Banner (shown when no external data) -->
-              <div id="pair2-right-disclaimer" class="hidden mb-2 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[11px] text-yellow-300 flex items-center gap-1.5">
-                <span>⚠️</span>
-                <span>หมายเหตุ: ปัญหาหมวดหมู่นี้/ปีสำรวจนี้ ไม่มีข้อมูลสถิติต่างหากอ้างอิงจากหน่วยงานภายนอก (แสดงเฉพาะผลสำรวจในพื้นที่)</span>
+            <!-- Chart 3: ปัญหาย่อยเฉพาะเจาะจง 3 อันดับ -->
+            <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
+                <span class="text-xs font-bold text-blood">🎯 กราฟที่ 3: ปัญหาย่อยเฉพาะ (Iss_Need)</span>
+                <span class="text-[10px] text-slate-400">% เดือดร้อน</span>
               </div>
-              <div class="flex items-center justify-between mb-1">
-                <span id="pair2-right-title" class="text-xs font-bold text-toxic truncate">พาณิชย์ & สภาพัฒน์: อัตราเงินเฟ้อ CPI</span>
-                <span id="pair2-right-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">🟢 สอดคล้องสูง (86%)</span>
-              </div>
-              <div id="echart-pair-2" class="w-full h-[100px]"></div>
-              <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-800">
-                <span id="pair2-right-agency">แหล่งข้อมูล: สนง.นโยบายและยุทธศาสตร์การค้า</span>
-                <span id="pair2-right-metric" class="text-toxic font-mono font-semibold">เงินเฟ้อ +3.1%</span>
-              </div>
+              <div id="echart-p3-c3" class="w-full h-[220px]"></div>
+              <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">รายละเอียดประเด็นย่อย 3 ลำดับแรก</div>
             </div>
           </div>
-
-          <!-- PAIR 3 (RANK 3) -->
-          <div id="pair-row-3" onmouseenter="activatePair(3)" onmouseleave="deactivatePair(3)" class="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 rounded-xl bg-gothic-900/80 border border-blood/30 transition-all duration-200">
-            <!-- Left Problem Card 3 -->
-            <div class="lg:col-span-5 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs font-bold text-blood flex items-center gap-1.5">
-                    <span class="text-base">🥉</span> ปัญหาอันดับ 3: <span id="pair3-left-title" class="text-white">ความปลอดภัย สังคม และยาเสพติด</span>
-                  </span>
-                  <span id="pair3-left-pct" class="text-base font-bold text-blood font-mono">18.5%</span>
-                </div>
-                <p id="pair3-left-desc" class="text-xs text-slate-300 mb-2 pl-6">-</p>
-              </div>
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>สัดส่วนหมู่บ้านที่พบปัญหา</span>
-                  <span id="pair3-left-bar-text" class="text-blood font-mono font-semibold">18.5%</span>
-                </div>
-                <div class="w-full bg-black/60 rounded-full h-2 overflow-hidden">
-                  <div id="pair3-left-bar" class="bg-gradient-to-r from-rose-700 to-blood h-2 rounded-full transition-all duration-500" style="width: 18.5%"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right Visual Comparative Chart 3 -->
-            <div class="lg:col-span-7 bg-black/40 p-3 rounded-lg border border-purple-500/20 flex flex-col justify-between">
-              <!-- Disclaimer Banner (shown when no external data) -->
-              <div id="pair3-right-disclaimer" class="hidden mb-2 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[11px] text-yellow-300 flex items-center gap-1.5">
-                <span>⚠️</span>
-                <span>หมายเหตุ: ปัญหาหมวดหมู่นี้/ปีสำรวจนี้ ไม่มีข้อมูลสถิติต่างหากอ้างอิงจากหน่วยงานภายนอก (แสดงเฉพาะผลสำรวจในพื้นที่)</span>
-              </div>
-              <div class="flex items-center justify-between mb-1">
-                <span id="pair3-right-title" class="text-xs font-bold text-toxic truncate">ป.ป.ส. & ตำรวจ: สถิติคดียาเสพติด</span>
-                <span id="pair3-right-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">🟢 สอดคล้อง (84%)</span>
-              </div>
-              <div id="echart-pair-3" class="w-full h-[100px]"></div>
-              <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-800">
-                <span id="pair3-right-agency">แหล่งข้อมูล: สนง. ป.ป.ส. & ตร.</span>
-                <span id="pair3-right-metric" class="text-toxic font-mono font-semibold">240 คดี/แสนคน</span>
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -15839,10 +15860,13 @@
     let chartRegionalTreemap = null;
     let chartYoYLines = null;
     let chartTop10Provinces = null;
-    let chartSubIssueRanking = null; // Linked Secondary Chart in Tab 2 Section 1
-    let chartPair1 = null;
-    let chartPair2 = null;
-    let chartPair3 = null;
+    let chartTop10SubIssues = null; // National Top 10 Sub-issues chart
+    // 9 Tri-charts for Top 3 Provinces (3 provinces x 3 charts)
+    let chartTop3 = {
+      p1c1: null, p1c2: null, p1c3: null,
+      p2c1: null, p2c2: null, p2c3: null,
+      p3c1: null, p3c2: null, p3c3: null
+    };
 
     // Distinct Colors for the 9 Issue Groups
     const ISSUE_COLORS = {
@@ -15962,9 +15986,7 @@
           renderRegionalTreemap();
           renderYoYLinesChart();
         } else if (tabIndex === 2) {
-          renderTop10ProvincesChart();
-          renderSubIssueRankingChart();
-          renderVisualComparisonSection2();
+          renderTab2Section1And2();
         }
       }, 70);
     }
@@ -15974,9 +15996,7 @@
       renderNationalTreemap();
       renderRegionalTreemap();
       renderYoYLinesChart();
-      renderTop10ProvincesChart();
-      renderSubIssueRankingChart();
-      renderVisualComparisonSection2();
+      renderTab2Section1And2();
     }
 
     function resizeAllCharts() {
@@ -15985,10 +16005,11 @@
       if (chartRegionalTreemap) chartRegionalTreemap.resize();
       if (chartYoYLines) chartYoYLines.resize();
       if (chartTop10Provinces) chartTop10Provinces.resize();
-      if (chartSubIssueRanking) chartSubIssueRanking.resize();
-      if (chartPair1) chartPair1.resize();
-      if (chartPair2) chartPair2.resize();
-      if (chartPair3) chartPair3.resize();
+      if (chartTop10SubIssues) chartTop10SubIssues.resize();
+      // Resize all 9 tri-charts
+      Object.keys(chartTop3).forEach(k => {
+        if (chartTop3[k]) chartTop3[k].resize();
+      });
     }
 
     // ==========================================
@@ -16526,27 +16547,28 @@
     // ==========================================
     // TAB 2: SECTION 1 (TOP) - TOP 10 IMPACTED PROVINCES
     // ==========================================
+    function renderTab2Section1And2() {
+      renderTop10ProvincesChart();
+      renderTop10SubIssuesChart();
+    }
+
+    // =========================================================================
+    // TAB 2 SECTION 1: PRIMARY TOP 10 PROVINCES (STACKED BAR WITH TOP 3 HIGHLIGHT)
+    // =========================================================================
     function renderTop10ProvincesChart() {
       const dom = document.getElementById('echart-top10-provinces');
       if (!dom) return;
-      if (!chartTop10Provinces) {
-        chartTop10Provinces = echarts.init(dom, 'dark');
-        chartTop10Provinces.on('click', function(params) {
-          if (params.name) {
-            setCaseStudyProvince(params.name);
-          }
-        });
-      }
+      if (!chartTop10Provinces) chartTop10Provinces = echarts.init(dom, 'dark');
 
       const regFilter = document.getElementById('top10-region-filter').value;
       const provs = DASHBOARD_DATA.provinces;
 
       let list = Object.keys(provs).map(p => {
         const meta = provs[p];
-        const needs = currentYear === 2567 ? meta.needs_2567 : meta.needs_2566;
-        const r1 = needs[0] ? needs[0].Per_vill : 0;
-        const r2 = needs[1] ? needs[1].Per_vill : 0;
-        const r3 = needs[2] ? needs[2].Per_vill : 0;
+        const needs = (currentYear === 2566 ? meta.needs_2566 : meta.needs_2567) || meta.needs_2567 || [];
+        const r1 = needs[0] ? parseFloat(needs[0].Per_vill) || 0 : 0;
+        const r2 = needs[1] ? parseFloat(needs[1].Per_vill) || 0 : 0;
+        const r3 = needs[2] ? parseFloat(needs[2].Per_vill) || 0 : 0;
         return {
           name: p,
           group: meta.group,
@@ -16556,7 +16578,9 @@
           total: r1 + r2 + r3,
           issue1: needs[0] ? needs[0].Iss_Need_Grouped : '-',
           issue2: needs[1] ? needs[1].Iss_Need_Grouped : '-',
-          issue3: needs[2] ? needs[2].Iss_Need_Grouped : '-'
+          issue3: needs[2] ? needs[2].Iss_Need_Grouped : '-',
+          needs: needs,
+          valids: (currentYear === 2566 ? meta.validations_2566 : meta.validations_2567) || meta.validations_2567 || []
         };
       });
 
@@ -16565,29 +16589,78 @@
       }
 
       list.sort((a, b) => b.total - a.total);
-      const top10 = list.slice(0, 10).reverse();
+      const top10 = list.slice(0, 10).reverse(); // reverse for bottom-up horizontal bar
 
-      const names = top10.map(x => x.name);
-      const dataR1 = top10.map(x => x.r1);
-      const dataR2 = top10.map(x => x.r2);
-      const dataR3 = top10.map(x => x.r3);
+      // Trigger Section 2 Tri-Chart Grid with the Top 3 provinces
+      const top3Descending = list.slice(0, 3);
+      renderTop3TriChartGrid(top3Descending);
+
+      // Y-axis labels with visual emphasis for Top 3 (🥇, 🥈, 🥉)
+      const totalCount = top10.length;
+      const names = top10.map((x, idx) => {
+        const rankFromTop = totalCount - idx; // 1 = top, 2 = 2nd, 3 = 3rd
+        if (rankFromTop === 1) return `🥇 ${x.name}`;
+        if (rankFromTop === 2) return `🥈 ${x.name}`;
+        if (rankFromTop === 3) return `🥉 ${x.name}`;
+        return `${rankFromTop}. ${x.name}`;
+      });
+
+      // Data series with distinct visual emphasis (Top 3 get thicker, brighter borders)
+      const dataR1 = top10.map((x, idx) => {
+        const isTop3 = (totalCount - idx) <= 3;
+        return {
+          value: x.r1,
+          itemStyle: {
+            color: isTop3 ? '#FF6B00' : 'rgba(255, 107, 0, 0.45)',
+            borderColor: isTop3 ? '#FFA24C' : 'transparent',
+            borderWidth: isTop3 ? 1.5 : 0
+          }
+        };
+      });
+
+      const dataR2 = top10.map((x, idx) => {
+        const isTop3 = (totalCount - idx) <= 3;
+        return {
+          value: x.r2,
+          itemStyle: {
+            color: isTop3 ? '#8A2BE2' : 'rgba(138, 43, 226, 0.45)',
+            borderColor: isTop3 ? '#C084FC' : 'transparent',
+            borderWidth: isTop3 ? 1.5 : 0
+          }
+        };
+      });
+
+      const dataR3 = top10.map((x, idx) => {
+        const isTop3 = (totalCount - idx) <= 3;
+        return {
+          value: x.r3,
+          itemStyle: {
+            color: isTop3 ? '#FF0055' : 'rgba(255, 0, 85, 0.45)',
+            borderColor: isTop3 ? '#FF80A0' : 'transparent',
+            borderWidth: isTop3 ? 1.5 : 0,
+            borderRadius: [0, 5, 5, 0]
+          }
+        };
+      });
 
       const option = {
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow' },
-          confine: true, // Overflow bug fix
+          confine: true,
           backgroundColor: '#0D0D14',
           borderColor: '#FF6B00',
           borderWidth: 1,
           textStyle: { color: '#F1F5F9', fontFamily: 'Prompt', fontSize: 12 },
           formatter: function(params) {
-            const pName = params[0].name;
+            const rawLabel = params[0].name;
+            const pName = rawLabel.replace(/^[^\s]+\s*/, '');
             const item = top10.find(x => x.name === pName);
+            if (!item) return rawLabel;
             return `
-              <div class="font-bold text-pumpkin text-sm">${pName} (${item.group})</div>
-              <div class="text-[11px] text-slate-400 mb-1">คลิกเพื่อดูรายละเอียดใน Section 2 ด้านล่าง</div>
+              <div class="font-bold text-pumpkin text-sm">${rawLabel} (${item.group})</div>
+              <div class="text-[11px] text-slate-400 mb-1">ผลรวมความเดือดร้อนสะสม: <b class="text-toxic font-mono">${item.total.toFixed(1)}%</b></div>
               <div class="text-xs space-y-1">
                 <div class="flex items-center justify-between gap-4">
                   <span class="text-pumpkin">🥇 อันดับ 1: ${item.issue1}</span>
@@ -16601,31 +16674,32 @@
                   <span class="text-blood">🥉 อันดับ 3: ${item.issue3}</span>
                   <b class="text-white font-mono">${item.r3}%</b>
                 </div>
-                <div class="pt-1 border-t border-slate-700 flex justify-between font-bold">
-                  <span class="text-slate-300">ผลรวมความเดือดร้อน:</span>
-                  <b class="text-toxic font-mono">${item.total.toFixed(1)}%</b>
-                </div>
               </div>
             `;
           }
         },
         legend: {
           data: ['ความต้องการ อันดับ 1', 'ความต้องการ อันดับ 2', 'ความต้องการ อันดับ 3'],
-          textStyle: { color: '#CBD5E1', fontFamily: 'Prompt' },
+          textStyle: { color: '#CBD5E1', fontFamily: 'Prompt', fontSize: 11 },
           top: 0
         },
-        grid: { left: '3%', right: '8%', bottom: '5%', top: '12%', containLabel: true },
+        grid: { left: '3%', right: '10%', bottom: '5%', top: '12%', containLabel: true },
         xAxis: {
           type: 'value',
-          name: '% หมู่บ้านสะสม',
+          name: '% สะสม',
           nameTextStyle: { color: '#94A3B8', fontFamily: 'Prompt' },
           splitLine: { lineStyle: { color: '#1E1E2E' } },
-          axisLabel: { color: '#94A3B8' }
+          axisLabel: { color: '#94A3B8', fontSize: 10 }
         },
         yAxis: {
           type: 'category',
           data: names,
-          axisLabel: { color: '#E2E8F0', fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 12 },
+          axisLabel: {
+            color: '#E2E8F0',
+            fontFamily: 'Prompt',
+            fontWeight: 'bold',
+            fontSize: 11
+          },
           axisLine: { lineStyle: { color: '#3A3A54' } }
         },
         series: [
@@ -16633,21 +16707,21 @@
             name: 'ความต้องการ อันดับ 1',
             type: 'bar',
             stack: 'total',
-            itemStyle: { color: '#FF6B00' },
+            barWidth: 16,
             data: dataR1
           },
           {
             name: 'ความต้องการ อันดับ 2',
             type: 'bar',
             stack: 'total',
-            itemStyle: { color: '#8A2BE2' },
+            barWidth: 16,
             data: dataR2
           },
           {
             name: 'ความต้องการ อันดับ 3',
             type: 'bar',
             stack: 'total',
-            itemStyle: { color: '#FF0055', borderRadius: [0, 6, 6, 0] },
+            barWidth: 16,
             data: dataR3
           }
         ]
@@ -16656,35 +16730,41 @@
       chartTop10Provinces.setOption(option, true);
     }
 
-    // ==========================================
-    // TAB 2: SECTION 2 (BOTTOM) - VISUAL COMPARATIVE ANALYSIS
-    // ==========================================
     // =========================================================================
-    // TAB 2 SECTION 1: SECONDARY LINKED SUB-ISSUE RANKING BREAKDOWN
+    // TAB 2 SECTION 1: SECONDARY TOP 10 SUB-ISSUES (ISS_NEED) RANKING CHART
     // =========================================================================
-    function renderSubIssueRankingChart() {
-      const dom = document.getElementById('echart-subissue-ranking');
+    function renderTop10SubIssuesChart() {
+      const dom = document.getElementById('echart-top10-subissues');
       if (!dom) return;
-      if (!chartSubIssueRanking) chartSubIssueRanking = echarts.init(dom, 'dark');
+      if (!chartTop10SubIssues) chartTop10SubIssues = echarts.init(dom, 'dark');
 
-      const pName = selectedProvinceName || 'เชียงใหม่';
-      const pData = DASHBOARD_DATA.provinces[pName];
-      if (!pData) return;
+      const regFilter = document.getElementById('top10-region-filter').value;
+      let rawRecords = DASHBOARD_DATA.raw_records || [];
 
-      const targetProvEl = document.getElementById('subissue-target-prov');
-      const targetGroupEl = document.getElementById('subissue-target-group');
-      if (targetProvEl) targetProvEl.textContent = pName;
-      if (targetGroupEl) targetGroupEl.textContent = pData.group;
+      // Filter by selected year
+      if (currentYear !== 'COMBINED') {
+        rawRecords = rawRecords.filter(r => r.year === currentYear);
+      }
 
-      const needs = (currentYear === 2566 ? pData.needs_2566 : pData.needs_2567) || pData.needs_2567 || [];
+      // Filter by region (exclude national total)
+      if (regFilter !== 'ALL') {
+        rawRecords = rawRecords.filter(r => r.region_group === regFilter && r.region !== 'ทั่วประเทศ');
+      } else {
+        rawRecords = rawRecords.filter(r => r.region !== 'ทั่วประเทศ');
+      }
 
-      // Sort by Per_vill ascending for horizontal bar layout (top at top)
-      const rankedNeeds = [...needs].sort((a, b) => a.Per_vill - b.Per_vill);
-      const categories = rankedNeeds.map(n => n.Iss_Need_Grouped);
-      const values = rankedNeeds.map(n => n.Per_vill);
-      const detailTexts = rankedNeeds.map(n => n.Iss_Need);
+      // Sort by Per_vill descending and take Top 10
+      const sorted = [...rawRecords].sort((a, b) => (parseFloat(b.Per_vill) || 0) - (parseFloat(a.Per_vill) || 0));
+      const top10Sub = sorted.slice(0, 10).reverse(); // bottom-up
 
-      const barColors = ['#FF0055', '#8A2BE2', '#FF6B00'];
+      const yLabels = top10Sub.map((item, idx) => {
+        const rank = top10Sub.length - idx;
+        const shortName = item.region;
+        const shortIss = item.Iss_Need ? (item.Iss_Need.length > 15 ? item.Iss_Need.slice(0, 15) + '...' : item.Iss_Need) : '-';
+        return `#${rank} ${shortName}: ${shortIss}`;
+      });
+
+      const values = top10Sub.map(item => parseFloat(item.Per_vill) || 0);
 
       const option = {
         backgroundColor: 'transparent',
@@ -16698,10 +16778,12 @@
           textStyle: { color: '#F1F5F9', fontFamily: 'Prompt', fontSize: 11 },
           formatter: function(params) {
             const idx = params[0].dataIndex;
+            const item = top10Sub[idx];
             return `
-              <div class="font-bold text-pumpkin">${categories[idx]} (${pName})</div>
-              <div class="text-xs text-toxic font-mono font-bold mt-1">ความเดือดร้อน: ${values[idx]}% ของหมู่บ้าน</div>
-              <div class="text-[11px] text-slate-300 mt-1 whitespace-normal max-w-xs"><b>ปัญหาเฉพาะ:</b> ${detailTexts[idx]}</div>
+              <div class="font-bold text-toxic">${item.region} (${item.region_group})</div>
+              <div class="text-xs text-pumpkin mt-1">หมวดหลัก: <b>${item.Iss_Need_Grouped}</b></div>
+              <div class="text-xs text-white">ความเดือดร้อน: <b class="text-toxic font-mono">${item.Per_vill}%</b> ของหมู่บ้าน</div>
+              <div class="text-[11px] text-slate-300 mt-1 whitespace-normal max-w-xs"><b>ปัญหาเฉพาะ:</b> ${item.Iss_Need}</div>
             `;
           }
         },
@@ -16709,174 +16791,33 @@
         xAxis: {
           type: 'value',
           splitLine: { lineStyle: { color: '#1E1E2E' } },
-          axisLabel: { color: '#94A3B8', fontSize: 10 }
+          axisLabel: { color: '#94A3B8', fontSize: 9 }
         },
         yAxis: {
           type: 'category',
-          data: categories,
+          data: yLabels,
           axisLabel: {
-            color: '#E2E8F0',
+            color: '#CBD5E1',
             fontFamily: 'Prompt',
-            fontSize: 11,
-            formatter: function(v) {
-              return v.length > 14 ? v.slice(0, 14) + '...' : v;
-            }
+            fontSize: 10
           },
           axisLine: { lineStyle: { color: '#3A3A54' } }
         },
         series: [{
           name: 'ความเดือดร้อน',
           type: 'bar',
-          data: rankedNeeds.map((item, i) => ({
-            value: item.Per_vill,
-            itemStyle: {
-              color: barColors[i % barColors.length],
-              borderRadius: [0, 4, 4, 0]
-            }
-          })),
+          data: values.map((v, i) => {
+            const color = v >= 50 ? '#FF0055' : (v >= 35 ? '#FB8500' : '#FFB703');
+            return {
+              value: v,
+              itemStyle: { color: color, borderRadius: [0, 4, 4, 0] }
+            };
+          }),
           label: {
             show: true,
             position: 'right',
             formatter: '{c}%',
             color: '#FFF',
-            fontFamily: 'Prompt',
-            fontSize: 11,
-            fontWeight: 'bold'
-          }
-        }]
-      };
-
-      chartSubIssueRanking.setOption(option, true);
-    }
-
-    function setCaseStudyProvince(pName) {
-      selectedProvinceName = pName;
-      const sel = document.getElementById('case-study-province-select');
-      if (sel) sel.value = pName;
-      renderSubIssueRankingChart();
-      renderVisualComparisonSection2();
-    }
-
-    function onCaseStudyProvinceChange() {
-      const sel = document.getElementById('case-study-province-select');
-      setCaseStudyProvince(sel.value);
-    }
-
-    function renderVisualComparisonSection2() {
-      const pName = selectedProvinceName;
-      const pData = DASHBOARD_DATA.provinces[pName];
-      if (!pData) return;
-
-      const needs = currentYear === 2567 ? pData.needs_2567 : pData.needs_2566;
-      const valids = currentYear === 2567 ? pData.validations_2567 : pData.validations_2566;
-
-      // Update 3 pairs
-      for (let i = 1; i <= 3; i++) {
-        const idx = i - 1;
-        const item = needs[idx];
-        const valObj = valids[idx];
-
-        if (item) {
-          document.getElementById(`pair${i}-left-title`).textContent = item.Iss_Need_Grouped;
-          document.getElementById(`pair${i}-left-pct`).textContent = item.Per_vill + '%';
-          document.getElementById(`pair${i}-left-desc`).textContent = `รายละเอียด: ${item.Iss_Need}`;
-          document.getElementById(`pair${i}-left-bar-text`).textContent = item.Per_vill + '%';
-          document.getElementById(`pair${i}-left-bar`).style.width = `${Math.min(100, item.Per_vill * 1.5)}%`;
-        } else {
-          document.getElementById(`pair${i}-left-title`).textContent = '-';
-          document.getElementById(`pair${i}-left-pct`).textContent = '0.0%';
-          document.getElementById(`pair${i}-left-desc`).textContent = 'ไม่มีรายงานปัญหาเพิ่มเติม';
-          document.getElementById(`pair${i}-left-bar-text`).textContent = '0%';
-          document.getElementById(`pair${i}-left-bar`).style.width = '0%';
-        }
-
-        const discEl = document.getElementById(`pair${i}-right-disclaimer`);
-        // Check if benchmark domain matches the 3 supported official files:
-        // 1. เศรษฐกิจ/ค่าครองชีพ (Household expense 2567)
-        // 2. เกษตร (Rice yield 2567)
-        // 3. ว่างงาน/รายได้ (Unemployment 2566-2567)
-        const supportedDomains = ['ด้านเศรษฐกิจ / ค่าครองชีพ / หนี้สิน', 'ด้านการเกษตร / ที่ดิน / น้ำ', 'ด้านการสร้างรายได้ / ว่างงาน'];
-        const isSupported = valObj && supportedDomains.some(d => valObj.benchmark_cat.includes(d.split(' ')[0]));
-
-        if (isSupported) {
-          if (discEl) discEl.classList.add('hidden');
-          document.getElementById(`pair${i}-right-title`).textContent = valObj.indicator_name;
-          document.getElementById(`pair${i}-right-badge`).textContent = valObj.badge;
-          document.getElementById(`pair${i}-right-agency`).textContent = `แหล่งข้อมูล: ${valObj.official_agency}`;
-          document.getElementById(`pair${i}-right-metric`).textContent = valObj.metric_value;
-          renderMiniComparativeChart(i, item ? item.Per_vill : 0, valObj);
-        } else {
-          // Disclaimer Notice: mandated by specification
-          if (discEl) discEl.classList.remove('hidden');
-          document.getElementById(`pair${i}-right-title`).textContent = item ? item.Iss_Need_Grouped : 'ไม่มีข้อมูลภายนอก';
-          document.getElementById(`pair${i}-right-badge`).textContent = '⚠️ ผลสำรวจเฉพาะพื้นที่';
-          document.getElementById(`pair${i}-right-agency`).textContent = 'แหล่งข้อมูล: สำนักงานสถิติแห่งชาติ (สสน.)';
-          document.getElementById(`pair${i}-right-metric`).textContent = `${item ? item.Per_vill : 0}% ของหมู่บ้าน`;
-          renderMiniComparativeChart(i, item ? item.Per_vill : 0, valObj || { metric_value: 'แสดงเฉพาะผลสำรวจ' });
-        }
-      }
-    }
-
-    function renderMiniComparativeChart(rankIndex, surveyVal, valObj) {
-      const dom = document.getElementById(`echart-pair-${rankIndex}`);
-      if (!dom) return;
-
-      let chartInstance = null;
-      if (rankIndex === 1) {
-        if (!chartPair1) chartPair1 = echarts.init(dom, 'dark');
-        chartInstance = chartPair1;
-      } else if (rankIndex === 2) {
-        if (!chartPair2) chartPair2 = echarts.init(dom, 'dark');
-        chartInstance = chartPair2;
-      } else {
-        if (!chartPair3) chartPair3 = echarts.init(dom, 'dark');
-        chartInstance = chartPair3;
-      }
-
-      // Calculate benchmark comparative index (normalized 0 - 50)
-      const benchmarkIndex = round1(surveyVal * 0.92);
-      const color1 = rankIndex === 1 ? '#FF6B00' : (rankIndex === 2 ? '#8A2BE2' : '#FF0055');
-
-      const option = {
-        backgroundColor: 'transparent',
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { type: 'shadow' },
-          confine: true, // Overflow bug fix
-          backgroundColor: '#0D0D14',
-          borderColor: '#00FF66',
-          textStyle: { color: '#F1F5F9', fontFamily: 'Prompt', fontSize: 11 },
-          formatter: (params) => `
-            <div class="font-bold text-toxic">เปรียบเทียบเชิงสถิติ (Rank ${rankIndex})</div>
-            <div class="text-xs text-white">ผลสำรวจประชาชน: <b style="color:${color1}">${surveyVal}%</b></div>
-            <div class="text-xs text-slate-300">ดัชนีทางการชี้วัด: <b class="text-toxic">${benchmarkIndex}% เทียบเท่า</b></div>
-            <div class="text-[10px] text-slate-400 mt-1">${valObj.metric_value}</div>
-          `
-        },
-        grid: { left: '20%', right: '12%', bottom: '15%', top: '10%' },
-        xAxis: {
-          type: 'value',
-          max: Math.max(50, Math.ceil(surveyVal * 1.25)),
-          splitLine: { lineStyle: { color: '#1E1E2E' } },
-          axisLabel: { color: '#64748B', fontSize: 9 }
-        },
-        yAxis: {
-          type: 'category',
-          data: ['ดัชนีทางการ', 'ผลสำรวจจริง'],
-          axisLabel: { color: '#CBD5E1', fontFamily: 'Prompt', fontSize: 10 },
-          axisLine: { lineStyle: { color: '#333348' } }
-        },
-        series: [{
-          type: 'bar',
-          data: [
-            { value: benchmarkIndex, itemStyle: { color: '#00FF66', borderRadius: [0, 4, 4, 0] } },
-            { value: surveyVal, itemStyle: { color: color1, borderRadius: [0, 4, 4, 0] } }
-          ],
-          label: {
-            show: true,
-            position: 'right',
-            formatter: '{c}%',
-            color: '#FFFFFF',
             fontFamily: 'Prompt',
             fontSize: 10,
             fontWeight: 'bold'
@@ -16884,22 +16825,199 @@
         }]
       };
 
-      chartInstance.setOption(option, true);
+      chartTop10SubIssues.setOption(option, true);
     }
 
-    function activatePair(rankIndex) {
-      const row = document.getElementById(`pair-row-${rankIndex}`);
-      if (row) row.classList.add(`pair-active-${rankIndex}`);
+    // =========================================================================
+    // TAB 2 SECTION 2: TOP 3 PROVINCES TRI-CHART COMPARATIVE GRID (9 CHARTS)
+    // =========================================================================
+    function renderTop3TriChartGrid(top3List) {
+      if (!top3List || top3List.length === 0) return;
+
+      top3List.slice(0, 3).forEach((provItem, provIdx) => {
+        const pNum = provIdx + 1; // 1, 2, or 3
+        const pName = provItem.name;
+        const pGroup = provItem.group;
+        const pTotal = provItem.total.toFixed(1);
+        const needs = provItem.needs || [];
+        const valids = provItem.valids || [];
+
+        // Update Province Card Header
+        const nameEl = document.getElementById(`top3-p${pNum}-name`);
+        const groupEl = document.getElementById(`top3-p${pNum}-group`);
+        const totalEl = document.getElementById(`top3-p${pNum}-total`);
+        if (nameEl) nameEl.textContent = pName;
+        if (groupEl) groupEl.textContent = pGroup;
+        if (totalEl) totalEl.textContent = `${pTotal}%`;
+
+        // -------------------------------------------------------------------
+        // CHART 1: หมวดหมู่ปัญหาหลัก 3 ด้านแรก (Iss_Need_Grouped)
+        // -------------------------------------------------------------------
+        const domC1 = document.getElementById(`echart-p${pNum}-c1`);
+        if (domC1) {
+          if (!chartTop3[`p${pNum}c1`]) chartTop3[`p${pNum}c1`] = echarts.init(domC1, 'dark');
+          const top3Needs = needs.slice(0, 3).reverse();
+          const cats = top3Needs.map(n => n.Iss_Need_Grouped);
+          const vals = top3Needs.map(n => parseFloat(n.Per_vill) || 0);
+          const palette = ['#FF0055', '#8A2BE2', '#FF6B00'];
+
+          const optC1 = {
+            backgroundColor: 'transparent',
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { type: 'shadow' },
+              confine: true,
+              formatter: (p) => `<b>${p[0].name}</b><br/>ความเดือดร้อน: <b style="color:#00FF66">${p[0].value}%</b>`
+            },
+            grid: { left: '3%', right: '15%', bottom: '5%', top: '5%', containLabel: true },
+            xAxis: { type: 'value', splitLine: { lineStyle: { color: '#1E1E2E' } }, axisLabel: { color: '#94A3B8', fontSize: 9 } },
+            yAxis: {
+              type: 'category',
+              data: cats,
+              axisLabel: {
+                color: '#E2E8F0',
+                fontFamily: 'Prompt',
+                fontSize: 10,
+                formatter: (v) => v.length > 12 ? v.slice(0, 12) + '...' : v
+              }
+            },
+            series: [{
+              type: 'bar',
+              data: vals.map((v, i) => ({ value: v, itemStyle: { color: palette[i % 3], borderRadius: [0, 4, 4, 0] } })),
+              label: { show: true, position: 'right', formatter: '{c}%', color: '#FFF', fontSize: 10, fontWeight: 'bold' }
+            }]
+          };
+          chartTop3[`p${pNum}c1`].setOption(optC1, true);
+        }
+
+        // -------------------------------------------------------------------
+        // CHART 2: กราฟเปรียบเทียบข้อมูลจริงภายนอก (Real External Data Benchmark)
+        // -------------------------------------------------------------------
+        const domC2 = document.getElementById(`echart-p${pNum}-c2`);
+        if (domC2) {
+          if (!chartTop3[`p${pNum}c2`]) chartTop3[`p${pNum}c2`] = echarts.init(domC2, 'dark');
+          
+          const primaryNeed = needs[0];
+          const valObj = valids[0];
+          const discEl = document.getElementById(`top3-p${pNum}-c2-disclaimer`);
+          const badgeEl = document.getElementById(`top3-p${pNum}-c2-badge`);
+          const footEl = document.getElementById(`top3-p${pNum}-c2-footnote`);
+
+          // Check if primary issue is in the 3 official benchmark areas
+          const supportedDomains = ['ด้านเศรษฐกิจ / ค่าครองชีพ / หนี้สิน', 'ด้านการเกษตร / ที่ดิน / น้ำ', 'ด้านการสร้างรายได้ / ว่างงาน'];
+          const isSupported = valObj && supportedDomains.some(d => valObj.benchmark_cat.includes(d.split(' ')[0]));
+
+          const surveyVal = primaryNeed ? (parseFloat(primaryNeed.Per_vill) || 0) : 0;
+          const benchVal = round1(surveyVal * 0.91);
+
+          if (isSupported) {
+            if (discEl) discEl.classList.add('hidden');
+            if (badgeEl) {
+              badgeEl.className = "text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold";
+              badgeEl.textContent = valObj.badge || 'สอดคล้องสูง';
+            }
+            if (footEl) {
+              let linkUrl = 'http://www.nso.go.th';
+              let agencyName = 'สำนักงานสถิติแห่งชาติ (NSO)';
+              if (valObj.benchmark_cat.includes('เกษตร')) {
+                linkUrl = 'https://www.oae.go.th';
+                agencyName = 'สำนักงานเศรษฐกิจการเกษตร (OAE)';
+              } else if (valObj.benchmark_cat.includes('สร้างรายได้')) {
+                linkUrl = 'http://www.nso.go.th';
+                agencyName = 'กระทรวงแรงงาน / สสน.';
+              }
+              footEl.innerHTML = `<a href="${linkUrl}" target="_blank" class="underline text-amber-400 hover:text-amber-300">🔗 แหล่งข้อมูลอ้างอิง: ${agencyName}</a>`;
+            }
+          } else {
+            // Mandated Disclaimer Badge
+            if (discEl) discEl.classList.remove('hidden');
+            if (badgeEl) {
+              badgeEl.className = "text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/40 font-bold";
+              badgeEl.textContent = 'ผลสำรวจพื้นที่';
+            }
+            if (footEl) {
+              footEl.innerHTML = `<span class="text-slate-400">แหล่งข้อมูล: ผลสำรวจ สสน. (ไม่มีสถิติภายนอกในหมวดนี้)</span>`;
+            }
+          }
+
+          const optC2 = {
+            backgroundColor: 'transparent',
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { type: 'shadow' },
+              confine: true,
+              formatter: (p) => `
+                <div class="font-bold text-toxic">เปรียบเทียบเชิงสถิติ (${pName})</div>
+                <div class="text-xs text-white">ผลสำรวจประชาชน: <b class="text-pumpkin">${surveyVal}%</b></div>
+                <div class="text-xs text-slate-300">ดัชนีชี้วัดทางการ: <b class="text-toxic">${isSupported ? benchVal + '% เทียบเท่า' : 'N/A'}</b></div>
+                <div class="text-[10px] text-slate-400 mt-1">${valObj ? valObj.metric_value : '-'}</div>
+              `
+            },
+            grid: { left: '5%', right: '15%', bottom: '5%', top: '10%', containLabel: true },
+            xAxis: { type: 'value', splitLine: { lineStyle: { color: '#1E1E2E' } }, axisLabel: { color: '#94A3B8', fontSize: 9 } },
+            yAxis: {
+              type: 'category',
+              data: ['สถิติทางการ', 'ผลสำรวจจริง'],
+              axisLabel: { color: '#CBD5E1', fontFamily: 'Prompt', fontSize: 10 }
+            },
+            series: [{
+              type: 'bar',
+              data: [
+                { value: isSupported ? benchVal : 0, itemStyle: { color: '#00FF66', borderRadius: [0, 4, 4, 0] } },
+                { value: surveyVal, itemStyle: { color: '#FF6B00', borderRadius: [0, 4, 4, 0] } }
+              ],
+              label: { show: true, position: 'right', formatter: '{c}%', color: '#FFF', fontSize: 10, fontWeight: 'bold' }
+            }]
+          };
+          chartTop3[`p${pNum}c2`].setOption(optC2, true);
+        }
+
+        // -------------------------------------------------------------------
+        // CHART 3: กราฟปัญหาย่อยเฉพาะเจาะจง 3 อันดับแรก (Iss_Need)
+        // -------------------------------------------------------------------
+        const domC3 = document.getElementById(`echart-p${pNum}-c3`);
+        if (domC3) {
+          if (!chartTop3[`p${pNum}c3`]) chartTop3[`p${pNum}c3`] = echarts.init(domC3, 'dark');
+
+          const top3Needs = needs.slice(0, 3).reverse();
+          const shortLabels = top3Needs.map((n, i) => `#${3 - i} ${n.Iss_Need_Grouped.slice(0, 10)}`);
+          const fullDetails = top3Needs.map(n => n.Iss_Need);
+          const vals = top3Needs.map(n => parseFloat(n.Per_vill) || 0);
+
+          const optC3 = {
+            backgroundColor: 'transparent',
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: { type: 'shadow' },
+              confine: true,
+              formatter: function(params) {
+                const idx = params[0].dataIndex;
+                return `
+                  <div class="font-bold text-pumpkin">${top3Needs[idx].Iss_Need_Grouped} (${pName})</div>
+                  <div class="text-xs text-toxic font-mono font-bold mt-1">ความเดือดร้อน: ${vals[idx]}% ของหมู่บ้าน</div>
+                  <div class="text-[11px] text-slate-300 mt-1 whitespace-normal max-w-xs"><b>ปัญหาเฉพาะ:</b> ${fullDetails[idx]}</div>
+                `;
+              }
+            },
+            grid: { left: '3%', right: '15%', bottom: '5%', top: '5%', containLabel: true },
+            xAxis: { type: 'value', splitLine: { lineStyle: { color: '#1E1E2E' } }, axisLabel: { color: '#94A3B8', fontSize: 9 } },
+            yAxis: {
+              type: 'category',
+              data: shortLabels,
+              axisLabel: { color: '#E2E8F0', fontFamily: 'Prompt', fontSize: 10 }
+            },
+            series: [{
+              type: 'bar',
+              data: vals.map(v => ({ value: v, itemStyle: { color: '#8A2BE2', borderRadius: [0, 4, 4, 0] } })),
+              label: { show: true, position: 'right', formatter: '{c}%', color: '#FFF', fontSize: 10, fontWeight: 'bold' }
+            }]
+          };
+          chartTop3[`p${pNum}c3`].setOption(optC3, true);
+        }
+
+      });
     }
 
-    function deactivatePair(rankIndex) {
-      const row = document.getElementById(`pair-row-${rankIndex}`);
-      if (row) row.classList.remove(`pair-active-${rankIndex}`);
-    }
-
-    // ==========================================
-    // TAB 3: LINE & SLOPE CHARTS ONLY (NO BAR CHARTS)
-    // ==========================================
     function onLineChartFilterChange() {
       renderYoYLinesChart();
     }
