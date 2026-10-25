@@ -16581,9 +16581,20 @@
                 `;
               }
             },
+            color: ['#FF6B00', '#00FF66'],
             legend: {
-              data: ['ผลสำรวจจริง', 'สถิติทางการ'],
-              textStyle: { color: '#CBD5E1', fontFamily: 'Prompt', fontSize: 10 },
+              data: [
+                {
+                  name: 'ผลสำรวจจริง',
+                  itemStyle: { color: '#FF6B00' },
+                  textStyle: { color: '#FF6B00', fontWeight: 'bold', fontFamily: 'Prompt', fontSize: 11 }
+                },
+                {
+                  name: 'สถิติทางการ',
+                  itemStyle: { color: '#00FF66' },
+                  textStyle: { color: '#00FF66', fontWeight: 'bold', fontFamily: 'Prompt', fontSize: 11 }
+                }
+              ],
               top: 0,
               itemWidth: 12,
               itemHeight: 8
