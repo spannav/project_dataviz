@@ -16789,6 +16789,16 @@
       chartNationalTreemap.setOption(option, true);
     }
 
+    // จำนวนจังหวัดจริงในแต่ละภูมิภาค (รวมครบ 77 จังหวัด)
+    const REGION_TOTAL_PROVINCES = {
+      'ภาคกลาง': 22,
+      'ภาคตะวันออกเฉียงเหนือ': 20,
+      'ภาคใต้': 14,
+      'ภาคเหนือ': 9,
+      'ภาคตะวันออก': 7,
+      'ภาคตะวันตก': 5
+    };
+
     function renderRegionalTreemap() {
       const dom = document.getElementById('echart-regional-treemap');
       if (!dom) return;
@@ -16812,31 +16822,40 @@
 
       const hasIssueFilter = !!tab1FilterState.selectedIssue && tab1FilterState.selectedIssue !== 'MAX';
 
-      const treeData = regionsToShow.map(region => ({
-        ...region,
-        itemStyle: {
-          color: TREEMAP_REGION_PALETTE[region.name] || '#FF6B00',
-          borderColor: '#141420',
-          borderWidth: 2
-        },
-        children: (region.children || []).map(child => {
-          const isTargetIssue = hasIssueFilter && child.name === tab1FilterState.selectedIssue;
-          const childColor = TREEMAP_ISSUE_PALETTE[child.name] || '#8A2BE2';
-          const childBorderColor = isTargetIssue ? '#00FF66' : '#141420';
-          const childBorderWidth = isTargetIssue ? 3.5 : 1;
-          const childOpacity = (hasIssueFilter && !isTargetIssue) ? 0.35 : 1.0;
+      const treeData = regionsToShow.map(region => {
+        const totalProvs = REGION_TOTAL_PROVINCES[region.name] || 20;
+        return {
+          ...region,
+          total_provs: totalProvs,
+          itemStyle: {
+            color: TREEMAP_REGION_PALETTE[region.name] || '#FF6B00',
+            borderColor: '#141420',
+            borderWidth: 2
+          },
+          children: (region.children || []).map(child => {
+            const isTargetIssue = hasIssueFilter && child.name === tab1FilterState.selectedIssue;
+            const childColor = TREEMAP_ISSUE_PALETTE[child.name] || '#8A2BE2';
+            const childBorderColor = isTargetIssue ? '#00FF66' : '#141420';
+            const childBorderWidth = isTargetIssue ? 3.5 : 1;
+            const childOpacity = (hasIssueFilter && !isTargetIssue) ? 0.35 : 1.0;
+            const rawCount = child.value; // จำนวนจังหวัดจริงในภาคที่พบปัญหานี้
+            const pctCoverage = ((rawCount / totalProvs) * 100).toFixed(1);
 
-          return {
-            ...child,
-            itemStyle: {
-              color: childColor,
-              opacity: childOpacity,
-              borderColor: childBorderColor,
-              borderWidth: childBorderWidth
-            }
-          };
-        })
-      }));
+            return {
+              ...child,
+              raw_count: rawCount,
+              total_provs: totalProvs,
+              pct_coverage: pctCoverage,
+              itemStyle: {
+                color: childColor,
+                opacity: childOpacity,
+                borderColor: childBorderColor,
+                borderWidth: childBorderWidth
+              }
+            };
+          })
+        };
+      });
 
       const option = {
         backgroundColor: 'transparent',
@@ -16847,13 +16866,55 @@
           borderWidth: 1,
           textStyle: { color: '#F1F5F9', fontFamily: 'Prompt', fontSize: 12 },
           formatter: function(info) {
-            const d = info.data;
+            const d = info.data || {};
+            // ถ้าเป็นกล่องแม่ของภูมิภาค (ไม่มี region_group)
+            if (!d.region_group) {
+              const regName = info.name;
+              const totalProvs = REGION_TOTAL_PROVINCES[regName] || '-';
+              const pctNation = totalProvs !== '-' ? ((totalProvs / 77) * 100).toFixed(1) : '-';
+              const topChild = (d.children && d.children[0]) ? `${d.children[0].name} (พบ ${d.children[0].value}/${totalProvs} จว.)` : '-';
+              return `
+                <div class="font-bold text-pumpkin text-sm flex items-center gap-1.5">
+                  <span>🏰</span> <span>${regName}</span>
+                </div>
+                <div class="mt-2 space-y-1 text-xs">
+                  <div class="text-slate-300">
+                    จำนวนจังหวัดในภาค: <b class="text-toxic font-mono text-sm">${totalProvs} จังหวัด</b> 
+                    <span class="text-slate-400">(${pctNation}% ของประเทศ)</span>
+                  </div>
+                  <div class="text-slate-300">
+                    ปัญหาเด่นอันดับ 1: <b class="text-purple-300">${topChild}</b>
+                  </div>
+                </div>
+                <div class="text-[10px] text-toxic/90 mt-2 border-t border-purple-500/30 pt-1">
+                  💡 คลิกเพื่อเจาะลึกเฉพาะ ${regName} และเชื่อมโยงกราฟอื่นๆ
+                </div>
+              `;
+            }
+
+            // ถ้าเป็นกล่องปัญหาย่อยในภาค (มี region_group)
+            const totalProvs = d.total_provs || REGION_TOTAL_PROVINCES[d.region_group] || 20;
+            const rawCount = d.raw_count !== undefined ? d.raw_count : info.value;
+            const pctCoverage = d.pct_coverage || ((rawCount / totalProvs) * 100).toFixed(1);
+
             return `
-              <div class="font-bold text-purple-300">${info.name}</div>
-              ${d.region_group ? `<div class="text-[11px] text-slate-400">ภูมิภาค: ${d.region_group}</div>` : ''}
-              <div class="mt-1 text-slate-300">จำนวนจังหวัดที่พบ: <b class="text-toxic">${info.value} จังหวัด</b></div>
-              ${d.avg_per ? `<div class="text-slate-300">สัดส่วนเฉลี่ย: <b class="text-pumpkin">${d.avg_per}%</b></div>` : ''}
-              <div class="text-[10px] text-green-300 mt-1">คลิกเพื่อเชื่อมโยงกรองกราฟอื่นๆ</div>
+              <div class="font-bold text-purple-300 text-sm">${info.name}</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">ภูมิภาค: <b class="text-slate-200">${d.region_group}</b></div>
+              <div class="mt-2 space-y-1.5 text-xs bg-gothic-900/60 p-2 rounded-lg border border-purple-500/20">
+                <div class="flex items-center justify-between gap-4">
+                  <span class="text-slate-300">ความครอบคลุมในภาค:</span>
+                  <span class="font-mono text-toxic font-bold">
+                    พบ ${rawCount} จาก ${totalProvs} จังหวัด 
+                    <span class="text-amber-400 font-bold">(${pctCoverage}%)</span>
+                  </span>
+                </div>
+                ${d.avg_per ? `
+                <div class="flex items-center justify-between gap-4 border-t border-purple-900/40 pt-1">
+                  <span class="text-slate-300">สัดส่วนชุมชนเฉลี่ย:</span>
+                  <b class="text-pumpkin font-mono">${d.avg_per}% <span class="text-slate-400 text-[10px] font-normal">ของหมู่บ้านในภาค</span></b>
+                </div>` : ''}
+              </div>
+              <div class="text-[10px] text-green-300/90 mt-1.5">💡 คลิกเพื่อเชื่อมโยงกรองกราฟอื่นๆ</div>
             `;
           }
         },
@@ -16885,17 +16946,38 @@
               },
               upperLabel: {
                 show: true,
-                height: 22,
+                height: 24,
                 color: '#00FF66',
                 fontFamily: 'Prompt',
                 fontWeight: 'bold',
-                fontSize: 12
+                fontSize: 12,
+                formatter: function(params) {
+                  const regName = params.name;
+                  const total = REGION_TOTAL_PROVINCES[regName];
+                  return total ? `${regName} (${total} จังหวัด)` : regName;
+                }
               }
             },
             {
               itemStyle: {
                 gapWidth: 1,
                 borderColor: '#161622'
+              },
+              label: {
+                show: true,
+                fontFamily: 'Prompt',
+                fontSize: 10,
+                color: '#FFFFFF',
+                formatter: function(params) {
+                  const d = params.data || {};
+                  const total = d.total_provs || (d.region_group ? REGION_TOTAL_PROVINCES[d.region_group] : 0);
+                  const count = d.raw_count !== undefined ? d.raw_count : params.value;
+                  if (total > 0) {
+                    const pct = Math.round((count / total) * 100);
+                    return `${params.name}\n${count}/${total} จว. (${pct}%)`;
+                  }
+                  return params.name;
+                }
               }
             }
           ]
