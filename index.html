@@ -16974,7 +16974,7 @@
                   const count = d.raw_count !== undefined ? d.raw_count : params.value;
                   if (total > 0) {
                     const pct = Math.round((count / total) * 100);
-                    return `${params.name}\n${count}/${total} จว. (${pct}%)`;
+                    return `${params.name}\n(${pct}%)`;
                   }
                   return params.name;
                 }
