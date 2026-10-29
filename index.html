@@ -539,7 +539,7 @@
       <div class="glass-card p-4 rounded-2xl relative overflow-hidden group">
         <div class="absolute -right-4 -bottom-4 text-5xl opacity-15 group-hover:scale-125 transition-transform">🚨</div>
         <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-          <span class="flex items-center gap-1"><span>⚡</span> ประเด็นวิกฤตพุ่งแรง (Spike)</span>
+          <span class="flex items-center gap-1"><span>⚡</span> ประเด็นที่รายงานเพิ่มขึ้นสูงสุด (Spike)</span>
           <span class="text-[10px] text-blood font-mono font-bold">New Entry</span>
         </div>
         <div id="kpi-val-3" class="text-2xl font-bold text-blood glow-blood-text">17.2%</div>
@@ -597,7 +597,7 @@
             </div>
             
             <p class="text-xs text-slate-400">
-              แผนที่ประเทศไทยรูปทรงภูมิศาสตร์จริง ไม่ใช้ Voronoi ลงสีตามร้อยละหมู่บ้านที่เดือดร้อน (<span class="text-pumpkin font-semibold">% Per_vill</span>)
+              แผนที่ประเทศไทยรูปทรงภูมิศาสตร์จริง ลงสีตามสัดส่วนชุมชนที่รายงานปัญหา (<span class="text-pumpkin font-semibold">% ของหมู่บ้าน / Per_vill</span>)
             </p>
 
             <!-- DROPDOWN CATEGORY FILTER (RESTORED AS SPECIFIED) -->
@@ -624,7 +624,7 @@
           <!-- COMPLETE COLOR LEGEND (SPECIFIED 4 CRISIS THRESHOLDS + FALLBACK) -->
           <div class="py-2.5 px-3 my-2 rounded-xl bg-gothic-900/80 border border-purple-500/20">
             <div class="text-[11px] font-semibold text-slate-300 mb-1.5 flex items-center justify-between">
-              <span>🎨 ระดับสีความรุนแรง (% ของหมู่บ้านเดือดร้อน):</span>
+              <span>🎨 สัดส่วนชุมชนที่รายงานปัญหา (% ของหมู่บ้าน):</span>
               <span id="map-legend-stat" class="text-toxic text-[10px] font-mono">Max: 70.0%</span>
             </div>
             <div class="grid grid-cols-5 gap-1.5 text-[10px] text-center font-medium">
@@ -633,7 +633,7 @@
                 <span class="text-[9px] opacity-70">(0%)</span>
               </div>
               <div class="p-1 rounded border border-amber-500/50 text-amber-200 flex flex-col items-center justify-center" style="background:#FFB70322">
-                <span class="text-amber-400 font-bold">🟡 น้อย</span>
+                <span class="text-amber-400 font-bold">🟡 ต่ำ</span>
                 <span>&lt; 20%</span>
               </div>
               <div class="p-1 rounded border border-orange-500/50 text-orange-200 flex flex-col items-center justify-center" style="background:#FB850022">
@@ -645,7 +645,7 @@
                 <span>35.1% - 50%</span>
               </div>
               <div class="p-1 rounded border border-red-700/60 text-red-200 flex flex-col items-center justify-center" style="background:#80002044">
-                <span class="text-red-400 font-bold">🩸 วิกฤต</span>
+                <span class="text-red-400 font-bold">🩸 สูงมาก</span>
                 <span>&gt; 50%</span>
               </div>
             </div>
@@ -745,7 +745,10 @@
               <span>National Issue YoY Trend Chart (แนวโน้ม 9 หมวดหมู่ปัญหา 2566 vs 2567)</span>
             </h3>
             <p class="text-xs text-slate-400 mt-0.5">
-              เปรียบเทียบแนวโน้มความเดือดร้อนรายปี 🟣 <b class="text-purple-400">ปี 2566 (เส้นประ)</b> vs 🟠 <b class="text-pumpkin">ปี 2567 (เส้นทึบ)</b> พร้อมป้ายกำกับผลต่าง YoY (&Delta;)
+              เปรียบเทียบแนวโน้มสัดส่วนชุมชนที่รายงานปัญหารายปี 🟣 <b class="text-purple-400">ปีฐาน 2566 (เส้นประ)</b> vs 🟠 <b class="text-pumpkin">ปี 2567 (เส้นทึบ)</b>
+              <span class="text-slate-300 font-mono text-[11px] block mt-1">
+                📐 <b>สูตรคำนวณ:</b> ผลต่างจุดร้อยละ (&Delta; %p) = ค่าปี 2567 - ค่าปี 2566 (ปีฐาน) | อัตราการเปลี่ยนแปลง (% YoY) = [(ค่าปี 2567 - ค่าปี 2566) / ค่าปี 2566] &times; 100
+              </span>
             </p>
           </div>
 
@@ -805,7 +808,7 @@
               <span>SECTION 1: Top 10 Impacted Provinces & Top 10 Sub-Issues (ภาพรวมระดับประเทศ/ภูมิภาค)</span>
             </h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              กราฟคู่ขนาน Dual-Panel: ฝั่งซ้ายเน้น 🥇🥈🥉 <b class="text-pumpkin">3 อันดับแรกที่เดือดร้อนสะสมสูงสุด</b> (ส่งต่อสู่ Section 2) & ฝั่งขวาแสดง <b class="text-toxic">10 ปัญหาย่อยวิกฤตที่สุด</b>
+              กราฟคู่ขนาน Dual-Panel: ฝั่งซ้ายเน้น 🥇🥈🥉 <b class="text-pumpkin">3 อันดับแรกที่เดือดร้อนสะสมสูงสุด</b> (ส่งต่อสู่ Section 2) & ฝั่งขวาแสดง <b class="text-toxic">10 ปัญหาย่อยที่มีสัดส่วนรายงานสูงสุด</b>
             </p>
           </div>
 
@@ -863,7 +866,7 @@
                 <span>🔥</span>
                 <span>Top 10 Sub-Issue (Iss_Need) Ranking Chart</span>
               </span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-mono">10 ประเด็นย่อยวิกฤต</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-mono">10 ประเด็นย่อยที่รายงานสูงสุด</span>
             </div>
             <p class="text-[10px] text-slate-400 mb-1">
               ปัญหาย่อยเฉพาะเจาะจง (<span class="text-white">Iss_Need</span>) ที่มีสัดส่วน % เดือดร้อนสูงสุดในพื้นที่:
@@ -893,7 +896,7 @@
               <span>SECTION 2: Top 3 Provinces Tri-Chart Comparative Grid (เจาะลึก 3 จังหวัดอันดับแรก - รวม 9 กราฟ)</span>
             </h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              นำ 3 จังหวัดที่มีความเดือดร้อนสะสมสูงสุดจาก Section 1 มาวิเคราะห์เจาะลึกพร้อมกันทั้ง 3 ด้าน: <b class="text-pumpkin">กราฟที่ 1: หมวดหลัก</b> | <b class="text-toxic">กราฟที่ 2: เทียบสถิติจริงภายนอก</b> | <b class="text-purple-300">กราฟที่ 3: ปัญหาย่อยเฉพาะ</b>
+              นำ 3 จังหวัดที่มีสัดส่วนชุมชนรายงานปัญหาอันดับ 1 สูงสุดจาก Section 1 มาวิเคราะห์เจาะลึกพร้อมกันทั้ง 3 ด้าน: <b class="text-pumpkin">กราฟที่ 1: หมวดหลัก</b> | <b class="text-toxic">กราฟที่ 2: เทียบสถิติจริงภายนอก</b> | <b class="text-purple-300">กราฟที่ 3: ปัญหาย่อยเฉพาะ</b>
             </p>
           </div>
           <span class="text-xs px-3 py-1 rounded-full bg-witch/30 border border-witch text-purple-200 font-mono font-semibold">
@@ -912,7 +915,7 @@
                   <span id="top3-p1-name" class="text-white">ปัตตานี</span>
                   <span id="top3-p1-group" class="text-xs px-2.5 py-0.5 rounded-full bg-pumpkin/20 border border-pumpkin/50 text-pumpkin font-mono font-normal">ภาคใต้</span>
                 </h3>
-                <p class="text-xs text-slate-400">ระดับความเดือดร้อนสะสมรวม 3 ด้านแรก: <b id="top3-p1-total" class="text-toxic font-mono font-bold text-sm">152.9%</b></p>
+                <p class="text-xs text-slate-400">สัดส่วนชุมชนที่รายงานปัญหาอันดับ 1: <b id="top3-p1-total" class="text-pumpkin font-mono font-bold text-sm">-%</b></p>
               </div>
             </div>
             <span class="text-xs px-3 py-1 rounded-xl bg-black/60 border border-pumpkin/40 text-pumpkin font-mono">Top Impacted Rank #1</span>
@@ -934,7 +937,7 @@
             <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
                 <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก (3 ปัญหาหลัก)</span>
-                <span id="top3-p1-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+                <span id="top3-p1-c2-badge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-emerald-500/40 font-semibold">📌 สถิติทางการเทียบเคียง</span>
               </div>
               <!-- Disclaimer Badge if no external data -->
               <div id="top3-p1-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
@@ -991,7 +994,7 @@
             <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
                 <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก (3 ปัญหาหลัก)</span>
-                <span id="top3-p2-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+                <span id="top3-p2-c2-badge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-emerald-500/40 font-semibold">📌 สถิติทางการเทียบเคียง</span>
               </div>
               <div id="top3-p2-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
                 ⚠️ ไม่มีข้อมูลสถิติอ้างอิงภายนอกในหมวดนี้ (แสดงเฉพาะผลสำรวจในพื้นที่)
@@ -1025,7 +1028,7 @@
                   <span id="top3-p3-name" class="text-white">อุดรธานี</span>
                   <span id="top3-p3-group" class="text-xs px-2.5 py-0.5 rounded-full bg-toxic/20 border border-toxic/50 text-toxic font-mono font-normal">ภาคตะวันออกเฉียงเหนือ</span>
                 </h3>
-                <p class="text-xs text-slate-400">ระดับความเดือดร้อนสะสมรวม 3 ด้านแรก: <b id="top3-p3-total" class="text-toxic font-mono font-bold text-sm">133.3%</b></p>
+                <p class="text-xs text-slate-400">สัดส่วนชุมชนที่รายงานปัญหาอันดับ 1: <b id="top3-p3-total" class="text-emerald-400 font-mono font-bold text-sm">-%</b></p>
               </div>
             </div>
             <span class="text-xs px-3 py-1 rounded-xl bg-black/60 border border-toxic/40 text-toxic font-mono">Top Impacted Rank #3</span>
@@ -1047,7 +1050,7 @@
             <div class="bg-black/40 p-3.5 rounded-xl border border-purple-500/20 flex flex-col justify-between">
               <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-800">
                 <span class="text-xs font-bold text-toxic">⚖️ กราฟที่ 2: เทียบสถิติจริงภายนอก (3 ปัญหาหลัก)</span>
-                <span id="top3-p3-c2-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold">สอดคล้องสูง</span>
+                <span id="top3-p3-c2-badge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-emerald-500/40 font-semibold">📌 สถิติทางการเทียบเคียง</span>
               </div>
               <div id="top3-p3-c2-disclaimer" class="hidden my-1 p-2 rounded-lg bg-yellow-950/40 border border-yellow-600/50 text-[10px] text-yellow-300">
                 ⚠️ ไม่มีข้อมูลสถิติอ้างอิงภายนอกในหมวดนี้ (แสดงเฉพาะผลสำรวจในพื้นที่)
@@ -16625,7 +16628,7 @@
                   ${isSelected ? '📍 ' : ''}${params.name} (${pData.group})
                 </div>
                 <div style="font-size:11px;color:#CBD5E1;margin-top:4px">ประเด็น: <b style="color:#fff">${issueName}</b></div>
-                <div style="font-size:11px;color:#CBD5E1">ความเดือดร้อน: <b style="color:${noData ? '#9CA3AF' : '#00FF66'};font-family:monospace">${noData ? 'ไม่พบข้อมูล' : val + '%'}</b> ของหมู่บ้าน</div>
+                <div style="font-size:11px;color:#CBD5E1">สัดส่วนชุมชนที่รายงานปัญหา: <b style="color:${noData ? '#9CA3AF' : '#00FF66'};font-family:monospace">${noData ? 'ไม่พบข้อมูล' : val + '%'}</b> ของหมู่บ้าน</div>
                 <div style="font-size:10px;color:#A78BFA;margin-top:3px">${isSelected ? 'คลิกซ้ำเพื่อยกเลิกตัวกรอง' : 'คลิกเพื่อเชื่อมโยงกรอง Treemap'}</div>
               `;
             }
@@ -16950,7 +16953,7 @@
           r1: r1,
           r2: r2,
           r3: r3,
-          total: r1 + r2 + r3,
+          // Do not sum percentages across multiple-response survey items
           issue1: needs[0] ? needs[0].Iss_Need_Grouped : '-',
           issue2: needs[1] ? needs[1].Iss_Need_Grouped : '-',
           issue3: needs[2] ? needs[2].Iss_Need_Grouped : '-',
@@ -16963,7 +16966,8 @@
         list = list.filter(item => item.group === regFilter);
       }
 
-      list.sort((a, b) => b.total - a.total);
+      // Rank by Primary Top 1 Issue percentage (if tie, compare Rank 2 then Rank 3)
+      list.sort((a, b) => b.r1 - a.r1 || b.r2 - a.r2 || b.r3 - a.r3);
       const top10 = list.slice(0, 10).reverse(); // reverse for bottom-up horizontal bar
 
       // Trigger Section 2 Tri-Chart Grid with the Top 3 provinces
@@ -17035,7 +17039,7 @@
             if (!item) return rawLabel;
             return `
               <div class="font-bold text-pumpkin text-sm">${rawLabel} (${item.group})</div>
-              <div class="text-[11px] text-slate-400 mb-1">ผลรวมความเดือดร้อนสะสม: <b class="text-toxic font-mono">${item.total.toFixed(1)}%</b></div>
+              <div class="text-[11px] text-slate-400 mb-1">สัดส่วนชุมชนที่รายงานปัญหาอันดับ 1: <b class="text-pumpkin font-mono">${item.r1}%</b></div>
               <div class="text-xs space-y-1">
                 <div class="flex items-center justify-between gap-4">
                   <span class="font-bold text-[#FF6B00]">🥇 ความต้องการ อันดับ 1: ${item.issue1}</span>
@@ -17228,17 +17232,18 @@
         const pNum = provIdx + 1; // 1, 2, or 3
         const pName = provItem.name;
         const pGroup = provItem.group;
-        const pTotal = provItem.total.toFixed(1);
         const needs = provItem.needs || [];
         const valids = provItem.valids || [];
+        const r1Val = provItem.r1 !== undefined ? provItem.r1.toFixed(1) : (needs[0] ? parseFloat(needs[0].Per_vill).toFixed(1) : '0.0');
+        const topIssueName = needs[0] ? needs[0].Iss_Need_Grouped : '';
 
-        // Update Province Card Header
+        // Update Province Card Header (Show Top 1 Issue percentage, not invalid sum)
         const nameEl = document.getElementById(`top3-p${pNum}-name`);
         const groupEl = document.getElementById(`top3-p${pNum}-group`);
         const totalEl = document.getElementById(`top3-p${pNum}-total`);
         if (nameEl) nameEl.textContent = pName;
         if (groupEl) groupEl.textContent = pGroup;
-        if (totalEl) totalEl.textContent = `${pTotal}%`;
+        if (totalEl) totalEl.textContent = `${r1Val}% (${topIssueName})`;
 
         // -------------------------------------------------------------------
         // CHART 1: หมวดหมู่ปัญหาหลัก 3 ด้านแรก (Iss_Need_Grouped)
@@ -17257,7 +17262,7 @@
               trigger: 'axis',
               axisPointer: { type: 'shadow' },
               confine: true,
-              formatter: (p) => `<b>${p[0].name}</b><br/>ความเดือดร้อน: <b style="color:#00FF66">${p[0].value}%</b>`
+              formatter: (p) => `<b>${p[0].name}</b><br/>สัดส่วนชุมชนที่รายงานปัญหา: <b style="color:#00FF66">${p[0].value}%</b>`
             },
             grid: { left: '3%', right: '15%', bottom: '5%', top: '5%', containLabel: true },
             xAxis: { type: 'value', splitLine: { lineStyle: { color: '#1E1E2E' } }, axisLabel: { color: '#94A3B8', fontSize: 9 } },
@@ -17302,22 +17307,11 @@
             return round1(surveyData[i] * 0.91);
           });
 
-          // Calculate overall consistency score across the 3 issues
-          let totalScore = 0;
-          let count = 0;
-          top3Valids.forEach(v => {
-            if (v && v.alignment_score) {
-              totalScore += v.alignment_score;
-              count++;
-            }
-          });
-          const avgScore = count > 0 ? (totalScore / count).toFixed(1) : '89.2';
-
-          // Update Consistency Badge
+          // Benchmark Data Badge (no arbitrary unsupported score percentage)
           const badgeEl = document.getElementById(`top3-p${pNum}-c2-badge`);
           if (badgeEl) {
-            badgeEl.className = "text-[10px] px-2 py-0.5 rounded-full bg-toxic/20 text-toxic border border-toxic/40 font-bold";
-            badgeEl.textContent = `🟢 สอดคล้องสูง (${avgScore}%)`;
+            badgeEl.className = "text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-emerald-500/40 font-semibold";
+            badgeEl.textContent = `📌 สถิติทางการเทียบเคียง`;
           }
 
           // Hide disclaimer banner by default since all issues are mapped to external datasets
@@ -17373,7 +17367,6 @@
                   <div class="text-[10px] text-slate-300 pt-1 mt-1 border-t border-slate-700">
                     <div><b>ตัวชี้วัด:</b> ${valItem.metric_value || '-'}</div>
                     <div class="text-amber-400"><b>หน่วยงาน:</b> ${valItem.official_agency || '-'}</div>
-                    <div class="text-toxic font-bold mt-0.5">ความสอดคล้อง: ${valItem.alignment_score || avgScore}%</div>
                   </div>
                 `;
               }
@@ -17463,7 +17456,7 @@
                 const idx = params[0].dataIndex;
                 return `
                   <div class="font-bold text-pumpkin">${top3Needs[idx].Iss_Need_Grouped} (${pName})</div>
-                  <div class="text-xs text-toxic font-mono font-bold mt-1">ความเดือดร้อน: ${vals[idx]}% ของหมู่บ้าน</div>
+                  <div class="text-xs text-toxic font-mono font-bold mt-1">สัดส่วนชุมชนที่รายงานปัญหา: ${vals[idx]}% ของหมู่บ้าน</div>
                   <div class="text-[11px] text-slate-300 mt-1 whitespace-normal max-w-xs"><b>ปัญหาเฉพาะ:</b> ${fullDetails[idx]}</div>
                 `;
               }
@@ -17529,7 +17522,13 @@
         const val67 = round1(avg67);
         data66.push(val66);
         data67.push(val67);
-        deltas.push(round1(val67 - val66));
+        
+        // Statistical Formulas (Base Year: 2566)
+        // 1. Percentage Points Difference (%p): Delta = val67 - val66
+        // 2. Relative Percentage Change (%): ((val67 - val66) / val66) * 100
+        const deltaPt = round1(val67 - val66);
+        const pctChange = val66 > 0 ? round1(((val67 - val66) / val66) * 100) : 0;
+        deltas.push({ deltaPt, pctChange });
       });
 
       const option = {
@@ -17543,19 +17542,26 @@
             const idx = params[0].dataIndex;
             const cat = targetCategories[idx];
             const d = deltas[idx];
+            const signPt = d.deltaPt >= 0 ? '+' : '';
+            const signPct = d.pctChange >= 0 ? '+' : '';
             return `
               <div class="font-bold text-pumpkin text-sm">${cat}</div>
               <div class="text-[11px] text-slate-400">ภูมิภาค: ${regFilter === 'ALL' ? 'ภาพรวมทั่วประเทศ' : regFilter}</div>
-              <div class="text-xs text-slate-300 mt-1">ปี 2566: <b class="text-purple-300">${data66[idx]}%</b></div>
-              <div class="text-xs text-slate-300">ปี 2567: <b class="text-pumpkin">${data67[idx]}%</b></div>
-              <div class="text-xs mt-1 pt-1 border-t border-slate-700 font-bold ${d >= 0 ? 'text-toxic' : 'text-slate-400'}">
-                ส่วนต่าง YoY Delta: ${d >= 0 ? '+' : ''}${d}% จุด
+              <div class="text-xs text-slate-300 mt-1">ปีฐาน 2566: <b class="text-purple-300">${data66[idx]}%</b> ของชุมชน</div>
+              <div class="text-xs text-slate-300">ปี 2567: <b class="text-pumpkin">${data67[idx]}%</b> ของชุมชน</div>
+              <div class="text-xs mt-1.5 pt-1.5 border-t border-slate-700 space-y-1">
+                <div class="font-bold ${d.deltaPt >= 0 ? 'text-toxic' : 'text-slate-400'}">
+                  ผลต่างจุดร้อยละ (Δ): ${signPt}${d.deltaPt} %p (เทียบปีฐาน 2566)
+                </div>
+                <div class="text-[11px] text-slate-400">
+                  อัตราการเปลี่ยนแปลง (YoY % Change): <b class="${d.pctChange >= 0 ? 'text-toxic' : 'text-slate-300'}">${signPct}${d.pctChange}%</b>
+                </div>
               </div>
             `;
           }
         },
         legend: {
-          data: ['ปี 2566 (สำรวจครั้งที่ 1)', 'ปี 2567 (สำรวจครั้งที่ 2)'],
+          data: ['ปีฐาน 2566 (สำรวจครั้งที่ 1)', 'ปี 2567 (สำรวจครั้งที่ 2)'],
           top: 0,
           textStyle: { color: '#CBD5E1', fontFamily: 'Prompt' }
         },
@@ -17581,7 +17587,7 @@
         },
         series: [
           {
-            name: 'ปี 2566 (สำรวจครั้งที่ 1)',
+            name: 'ปีฐาน 2566 (สำรวจครั้งที่ 1)',
             type: 'line',
             data: data66,
             symbolSize: 8,
@@ -17608,7 +17614,7 @@
               position: 'top',
               formatter: (p) => {
                 const d = deltas[p.dataIndex];
-                return `${p.value}% (${d >= 0 ? '+' : ''}${d}%)`;
+                return `${p.value}% (${d.deltaPt >= 0 ? '+' : ''}${d.deltaPt}%p)`;
               },
               color: '#FFD700',
               fontFamily: 'Prompt',
